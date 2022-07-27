@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        {% for product in products %}
+            <div id="products" class="col-lg-4">
+                {% if not product.image %}
+                    <img class="thumbnail" src="{% static 'images/placeholder.png' %}">
+                {% else %}
+                    <img class="thumbnail" src="{{ product.image.url }}">
+                {% endif %}
+                <div class="box-element product">
+                    <h6><strong>{{ product.name }}</strong></h6>
+                    <hr>
+
+                    <button data-product={{ product.id }} data-action="add"
+                            class="btn btn-outline-secondary add-btn update-cart">Add to Cart
+                    </button>
+                    {% if request.user.is_staff %}
+                    <a class="btn btn-outline-success" href="{% url 'edit product' product.pk %}">Edit</a>
+                    <a class="btn btn-outline-success" href="{% url 'delete product' product.pk %}">Delete</a>
+                    <h4 style="display: inline-block; float: right"><strong>
+                        {% endif %}
+                        ${{ product.price|floatformat:2 }}</strong></h4>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
+
