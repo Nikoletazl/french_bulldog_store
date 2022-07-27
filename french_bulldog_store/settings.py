@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'french-bulldog-store.herokuapp.com',
+    '127.0.0.1'
 ]
 
 
