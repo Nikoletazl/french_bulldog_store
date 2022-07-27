@@ -84,8 +84,12 @@ WSGI_APPLICATION = 'french_bulldog_store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd6jev6rudosb68',
+        'USER': 'ffoqserafjpars',
+        'PASSWORD': 'a1587fb74a9a39a9606d1b5c6c22e1b3b025e10cfcc98c9c319814dd9167f8dd',
+        'HOST': 'ec2-50-19-255-190.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
