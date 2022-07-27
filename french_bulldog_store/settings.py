@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-#&bx47dbw&f(9jt24(immj&mztdh3mn^kv*8a)y-l=*u6oj&9-
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'frenchie-shop.herokuapp.com',
+    'french-bulldog-store.herokuapp.com',
 ]
 
 
