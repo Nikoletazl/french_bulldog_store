@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import cloudinary
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -86,10 +88,10 @@ WSGI_APPLICATION = 'french_bulldog_store.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd6jev6rudosb68',
-        'USER': 'ffoqserafjpars',
-        'PASSWORD': 'a1587fb74a9a39a9606d1b5c6c22e1b3b025e10cfcc98c9c319814dd9167f8dd',
-        'HOST': 'ec2-50-19-255-190.compute-1.amazonaws.com',
+        'NAME': 'd8jqv3hiprqitd',
+        'USER': 'xhhbudiadgagiw',
+        'PASSWORD': '9345a8b223dbe9fc6010fae315259fd31a9ddeef778d934fcc01f1700cbfbbe7',
+        'HOST': 'ec2-34-242-84-130.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -151,3 +153,9 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'home page'
 
 AUTH_USER_MODEL = 'auth_app.FrenchieUser'
+
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME', None),
+    api_key=os.getenv('CLOUDINARY_API_KEY', None),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET', None),
+)

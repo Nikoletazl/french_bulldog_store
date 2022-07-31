@@ -1,3 +1,4 @@
+from cloudinary import models as cloudinary_models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
@@ -33,10 +34,7 @@ class Product(models.Model):
         blank=True,
     )
 
-    image = models.ImageField(
-        null=True,
-        blank=True,
-    )
+    image = cloudinary_models.CloudinaryField('image')
 
     def __str__(self):
         return self.name
@@ -68,8 +66,7 @@ class AlbumPhoto(models.Model):
         blank=True,
     )
 
-    image = models.ImageField(
-    )
+    image = cloudinary_models.CloudinaryField('image')
 
     user = models.ForeignKey(
         UserModel,

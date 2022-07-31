@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import User, PermissionsMixin
 from django.core.validators import MinLengthValidator
 from django.db import models
+from cloudinary import  models as cloudinary_models
 
 from french_bulldog_store.auth_app.managers import FrenchieUserManager
 
@@ -50,10 +51,7 @@ class Customer(models.Model):
 
     email = models.EmailField()
 
-    picture = models.ImageField(
-        blank=True,
-        null=True,
-    )
+    picture = cloudinary_models.CloudinaryField('image')
 
     def __str__(self):
         return self.name
