@@ -1,1 +1,1 @@
-web: gunicorn french_bulldog_store.wsgi
+echo "web: python french_bulldog_store.py" > Procfile
