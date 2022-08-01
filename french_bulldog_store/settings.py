@@ -138,6 +138,7 @@ elif is_test():
 
 LOGGING = {
     'version': 1,
+    'disable_existing_loggers': False,
     'handlers': {
         'console': {
             'level': LOGGING_LEVEL,

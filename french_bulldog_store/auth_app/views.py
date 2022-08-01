@@ -14,12 +14,6 @@ class UserRegistrationView(CreateView):
     template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-
-        return kwargs
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -177,12 +171,6 @@ class Profile(DetailView):
     template_name = 'accounts/profile_details.html'
     context_object_name = 'profile'
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-
-        return kwargs
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -218,12 +206,6 @@ class EditProfileView(UpdateView):
 
         return super().form_valid(form)
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-
-        return kwargs
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -249,12 +231,6 @@ class DeleteProfileView(DeleteView):
     form_class = DeleteProfileForm
     template_name = 'accounts/profile_delete.html'
     success_url = reverse_lazy('home page')
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-
-        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
