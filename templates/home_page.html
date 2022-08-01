@@ -3,14 +3,7 @@
 {% block content %}
     <h1>Here are some of our most lovely Frenchies!</h1>
     {% if user.is_authenticated %}
-        <style>
-            .container {
-                text-align: center;
-                width: 800px;
-                height: 50px;
-                padding-top: 20px;
-            }
-        </style>
+
         <div class="container">
             <a class="btn btn-primary" href="{% url 'create photo' %}" role="button">Add Photo</a>
         </div>
