@@ -1,1 +1,0 @@
-echo "web: python french_bulldog_store.py" > Procfile
