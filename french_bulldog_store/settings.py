@@ -1,9 +1,6 @@
 import os
 from pathlib import Path
-
 import cloudinary
-from django.conf.global_settings import AUTH_PASSWORD_VALIDATORS
-
 from french_bulldog_store.utils import is_production, is_test
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,10 +9,7 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 SECRET_KEY = os.getenv('SECRET_KEY', 'sk')
 
-ALLOWED_HOSTS = [
-    'french-bulldog-store.herokuapp.com',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -63,16 +57,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'french_bulldog_store.wsgi.application'
 
-DATABASES = {
+DATABASES = None
+
+if APP_ENVIRONMENT == 'Production':
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd8jqv3hiprqitd',
-        'USER': 'xhhbudiadgagiw',
-        'PASSWORD': '9345a8b223dbe9fc6010fae315259fd31a9ddeef778d934fcc01f1700cbfbbe7',
-        'HOST': 'ec2-34-242-84-130.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', '5432')
     }
 }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'db.sqlite3',
+        }
+    }
+
+AUTH_PASSWORD_VALIDATORS = []
 
 if is_production():
     AUTH_PASSWORD_VALIDATORS.extend([

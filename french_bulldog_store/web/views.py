@@ -50,41 +50,6 @@ class CreatePhotoView(CreateView, LoginRequiredMixin):
     template_name = 'album/photo_create.html'
     success_url = reverse_lazy('home page')
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-
-        return kwargs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        if self.request.user.is_authenticated:
-            customer = self.request.user
-            order, created = Order.objects.get_or_create(customer=customer, complete=False)
-            cart_items = order.get_cart_items
-
-        else:
-            order = {'get_cart_total': 0, 'get_cart_items': 0}
-            cart_items = order['get_cart_items']
-
-
-        context.update({
-            'cart_items': cart_items,
-        })
-
-        return context
-
-
-
-
-class EditPhotoView(UpdateView, LoginRequiredMixin):
-    model = AlbumPhoto
-    form_class = EditPhotoForm
-    template_name = 'album/photo_edit.html'
-    success_url = reverse_lazy('home page')
-    context_object_name = 'photo'
-
     def get_success_url(self):
         if self.success_url:
             return self.success_url
@@ -120,18 +85,51 @@ class EditPhotoView(UpdateView, LoginRequiredMixin):
         return context
 
 
+
+
+class EditPhotoView(UpdateView, LoginRequiredMixin):
+    model = AlbumPhoto
+    form_class = EditPhotoForm
+    template_name = 'album/photo_edit.html'
+    success_url = reverse_lazy('home page')
+    context_object_name = 'photo'
+
+
+    def get_success_url(self):
+        if self.success_url:
+            return self.success_url
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated:
+            customer = self.request.user
+            order, created = Order.objects.get_or_create(customer=customer, complete=False)
+            cart_items = order.get_cart_items
+
+        else:
+            order = {'get_cart_total': 0, 'get_cart_items': 0}
+            cart_items = order['get_cart_items']
+
+
+        context.update({
+            'cart_items': cart_items,
+        })
+
+        return context
+
+
 class DeletePhotoView(DeleteView, LoginRequiredMixin):
     model = AlbumPhoto
     form_class = DeletePhotoForm
     template_name = 'album/photo_delete.html'
     success_url = reverse_lazy('home page')
     context_object_name = 'photo'
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-
-        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
