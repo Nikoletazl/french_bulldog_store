@@ -9,7 +9,11 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 SECRET_KEY = os.getenv('SECRET_KEY', 'sk')
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'french-bulldog-store.herokuapp.com',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
